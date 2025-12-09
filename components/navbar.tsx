@@ -27,7 +27,7 @@ export const Navbar = () => {
             </Button>
           ))}
         </div>
-        <div className="flex items-center">
+        <div>
           <div className="sm:hidden">
             <Menubar />
           </div>
