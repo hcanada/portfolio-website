@@ -32,12 +32,24 @@ export const Navbar = () => {
             <Menubar />
           </div>
           <div className="hidden sm:flex items-center">
-            <Button variant="ghost">
-              <Github />
-            </Button>
-            <Button variant="ghost">
-              <Linkedin />
-            </Button>
+            <Link
+              href="https://github.com/hcanada "
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="ghost">
+                <Github />
+              </Button>
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/h-canada/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="ghost">
+                <Linkedin />
+              </Button>
+            </Link>
             <ThemeToggle />
           </div>
         </div>
