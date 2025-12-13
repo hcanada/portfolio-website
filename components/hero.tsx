@@ -21,10 +21,9 @@ const profile = {
     availableForFreelance: true,
   },
 };
-// mx-auto w-full max-w-[1280px] 2xl:max-w-[1400px] px-4 sm:px-6 lg:px-8 mt-24 md:mt-28 lg:mt-32 2xl:mt-36 flex flex-col lg:flex-row gap-16 scroll-mt-60
 export const Hero = () => {
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-24 md:mt-28 lg:mt-32 2xl:mt-36 flex flex-col md:flex-row gap-16 scroll-mt-60">
+    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-24 md:mt-32 lg:mt-34 2xl:mt-60 flex flex-col md:flex-row gap-16 ">
       <section className="flex-1 border">
         <div className="flex justify-between items-center border-b space-x-5 py-2 px-4 md:py-4 md:px-8">
           <div className="flex space-x-2 items-center">
