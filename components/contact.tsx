@@ -39,7 +39,7 @@ export const Contact = () => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-24 md:mt-28 lg:mt-32 2xl:mt-36 flex flex-col-reverse md:flex-row  gap-16 scroll-mt-60 mb-50">
+    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-24 md:mt-28 lg:mt-32 2xl:mt-36 flex flex-col-reverse md:flex-row  gap-16  mb-50">
       <div className="flex-1 space-y-4 md:space-y-6">
         <h1 className="text-3xl md:text-4xl font-semibold">Get in Touch</h1>
         <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
