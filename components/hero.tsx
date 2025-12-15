@@ -50,7 +50,7 @@ export const Hero = () => {
             <p className="text-blue-900 dark:text-white pl-2 md:pl-6">
               role:{" "}
               <span className="text-green-700 dark:text-yellow-200">
-                {`"Frontend Developer"`}
+                {`"Full-stack Developer"`}
                 <span className="text-blue-900 dark:text-white">{`,`}</span>
               </span>
             </p>
