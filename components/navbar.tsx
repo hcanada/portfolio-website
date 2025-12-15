@@ -8,7 +8,7 @@ import { NavBarData } from "./navbarData";
 export const Navbar = () => {
   return (
     <header>
-      <nav className="fixed p-4 border-b flex justify-between  top-0 left-0 w-full bg-background/80 backdrop-blur md:px-40">
+      <nav className="fixed p-4 border-b flex justify-between  top-0 left-0 w-full bg-background/80 backdrop-blur md:px-40 z-20">
         <div>
           <Link href="/">
             <h1 className="font-bold text-2xl tracking-tight text-foreground">
@@ -19,7 +19,7 @@ export const Navbar = () => {
         <div className="hidden sm:block">
           {NavBarData.map((navbar) => (
             <Link href={navbar.link} key={navbar.name}>
-              <Button variant="ghost" className="mx-2 hover:cursor-pointer ">
+              <Button variant="ghost" className="mx-2 ">
                 {navbar.name}
               </Button>
             </Link>
