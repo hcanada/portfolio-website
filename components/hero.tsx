@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 const profile = {
   name: "H Canada",
@@ -34,8 +35,8 @@ export const Hero = () => {
           <div className="text-gray-400">profile.js</div>
         </div>
 
-        <code className="text-pink-600 font-semibold">
-          <div className="p-4">
+        <code className="text-pink-600 md:text-lg ">
+          <div className="p-7">
             <div>
               const <span className="text-violet-700">profile</span> ={" "}
               <span className="text-gray-400"> {`{`}</span>
@@ -96,14 +97,19 @@ export const Hero = () => {
           </div>
         </code>
       </section>
-      <section className="flex-1 flex justify-center">
+      <section className="flex-1 relative items-center md:flex justify-center hidden flex-col">
         <Image
-          width="450"
-          height="450"
-          src={"/curtin.jpeg"}
-          alt="Profile"
-          className="w-full object-cover"
+          src={"/pfp.jpeg"}
+          alt="Profile Picture"
+          width={380}
+          height={380}
+          className="max-w-full h-auto rounded-full mb-15"
         />
+        <Button variant={"outline"}>
+          <a download href="/resume.pdf">
+            Download Resume
+          </a>
+        </Button>
       </section>
     </div>
   );
