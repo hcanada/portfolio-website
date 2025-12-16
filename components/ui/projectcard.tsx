@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "./button";
 
 const project = [
   {
@@ -14,15 +15,15 @@ const project = [
     photo: "/inprogress.webp",
     description:
       "A location-based platform where people give away items for free, discover nearby giveaways, and connect with their community.",
-    stack: ["Nextjs -", " TypeScript -", " Supabase -", " Tailwind "],
+    stack: ["Nextjs", "TypeScript", "Supabase", "Tailwind "],
   },
   {
     name: "Travue",
     project: "personal",
     photo: "/inprogress.webp",
     description:
-      "A platform where people share their travel vlogs and experiences. Discover new places, get travel tips, and watch personal stories from other travelers.",
-    stack: ["Nextjs -", " TypeScript -", " Supabase -", " Tailwind "],
+      "A social media platform where people share their travel vlogs and experiences. Discover new places, get travel tips, and watch personal stories from other travelers.",
+    stack: ["Nextjs", "TypeScript", "Supabase", "Tailwind "],
   },
   {
     name: "Crypto Price Bot",
@@ -30,7 +31,7 @@ const project = [
     photo: "/bot.jpg",
     description:
       "A Telegram bot that instantly provides the latest cryptocurrency price. Simply type the name of any cryptocurrency, and the bot will reply with its current price.",
-    stack: ["Python -", " Telebot -", " Coinmarketcap API "],
+    stack: ["Python", "Telebot", "Coinmarketcap API "],
   },
   {
     name: "Leave Management System",
@@ -38,7 +39,7 @@ const project = [
     photo: "/lms.png",
     description:
       "An internal application developed for Mercedes-Benz Group Services Phils., Inc that allows employees to submit leave requests and enables managers and HR to approve and monitor employee leave.",
-    stack: ["ReactJS -", " .NET -", " MS SQL Server "],
+    stack: ["ReactJS", ".NET", "MS SQL Server "],
   },
 ];
 type ProjectCardProps = {
@@ -62,7 +63,17 @@ export const Projectcard = (props: ProjectCardProps) => {
                 <CardTitle className="text-xl mt-auto">{proj.name}</CardTitle>
                 <CardDescription>{proj.description}</CardDescription>
               </CardHeader>
-              <CardFooter className="mt-auto">{proj.stack}</CardFooter>
+              <CardFooter className="mt-auto flex-wrap">
+                {proj.stack.map((stack) => (
+                  <Button
+                    key={stack}
+                    variant={"link"}
+                    className="hover:cursor-default p-2 "
+                  >
+                    {stack}
+                  </Button>
+                ))}
+              </CardFooter>
             </Card>
           )
       )}
