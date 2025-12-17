@@ -9,13 +9,13 @@ export default function Home() {
       <section>
         <Hero />
       </section>
-      <section id="about" className="scroll-mt-32">
+      <section id="about" className="scroll-mt-24 md:scroll-mt-32">
         <Aboutme />
       </section>
-      <section id="projects" className="scroll-mt-32">
+      <section id="projects" className="scroll-mt-24 md:scroll-mt-32">
         <Projects />
       </section>
-      <section id="contact" className="scroll-mt-32">
+      <section id="contact" className="scroll-mt-24 md:scroll-mt-32">
         <Contact />
       </section>
     </main>
