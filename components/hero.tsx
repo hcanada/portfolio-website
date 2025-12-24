@@ -99,17 +99,12 @@ export const Hero = () => {
       </section>
       <section className="flex-1 relative items-center md:flex justify-center hidden flex-col">
         <Image
-          src={"/pfp.jpeg"}
+          src={"/pfp.png"}
           alt="Profile Picture"
-          width={380}
-          height={380}
-          className="max-w-full h-auto rounded-full mb-15"
+          width={480}
+          height={480}
+          className="rounded-full object-cover size-112"
         />
-        <Button variant={"outline"}>
-          <a download href="/resume.pdf">
-            Download Resume
-          </a>
-        </Button>
       </section>
     </div>
   );
