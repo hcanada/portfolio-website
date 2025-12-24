@@ -54,12 +54,14 @@ export const Projectcard = (props: ProjectCardProps) => {
           proj.project === selectedProject && (
             <Card key={proj.name} className="max-w-sm flex-1">
               <CardHeader>
-                <Image
-                  src={proj.photo}
-                  alt="Project photo"
-                  width={500}
-                  height={500}
-                />
+                <div className="relative h-48 md:h-64 w-full">
+                  <Image
+                    src={proj.photo}
+                    alt="Project photo"
+                    fill
+                    style={{ objectFit: "contain" }}
+                  />
+                </div>
                 <CardTitle className="text-xl mt-auto">{proj.name}</CardTitle>
                 <CardDescription>{proj.description}</CardDescription>
               </CardHeader>
