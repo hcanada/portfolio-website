@@ -4,6 +4,8 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { SectionHeading } from "./section-heading";
+
 export const Contact = () => {
   const sendEmailAPI = "/api/email";
   const [email, setEmail] = useState("");
@@ -25,74 +27,87 @@ export const Contact = () => {
         body: JSON.stringify({ name, email, subject, message }),
       });
       if (res.ok) {
-        toast("Email sent successfully!");
+        toast("Message sent. I'll reply by email.");
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
       } else {
-        toast.error("Something went wrong. Please try again.");
+        toast.error("Message not sent. Please try again.");
       }
     } catch (error) {
       console.error(error);
+      toast.error("Message not sent. Check your connection and try again.");
     } finally {
       setLoading(false); // re-enable button
     }
-
-    console.log(email, name, message, subject);
   };
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-24 md:mt-28 lg:mt-32 2xl:mt-36 flex flex-col-reverse md:flex-row  gap-16  mb-50">
-      <div className="flex-1 space-y-4 md:space-y-6">
-        <h1 className="text-3xl md:text-4xl font-semibold">Get in Touch</h1>
-        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-          <label htmlFor="name">Name</label>
-          <Input
-            name="name"
-            id="name"
-            placeholder="Your Name"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <label htmlFor="email">Email</label>
-          <Input
-            name="email"
-            id="email"
-            placeholder="your@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label htmlFor="subject">Subject</label>
+    <div>
+      <SectionHeading
+        title="Get in touch"
+        intro="Based in the Philippines and available worldwide. Whether you're in the Philippines, the United States, Australia, or anywhere else, I'm ready to work with you remotely."
+      />
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div className="space-y-2">
+            <label htmlFor="name" className="text-sm font-medium">
+              Name
+            </label>
+            <Input
+              name="name"
+              id="name"
+              placeholder="Your name"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="email" className="text-sm font-medium">
+              Email
+            </label>
+            <Input
+              name="email"
+              id="email"
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="subject" className="text-sm font-medium">
+            Subject
+          </label>
           <Input
             name="subject"
             id="subject"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
           />
-          <label htmlFor="message">Message</label>
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="message" className="text-sm font-medium">
+            Message
+          </label>
           <Textarea
             name="message"
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type your message here."
-            className="pb-20 mt-2"
+            placeholder="Tell me about your project."
+            className="min-h-36"
             required
           />
-          <Button type="submit" variant={"secondary"} disabled={loading}>
-            {loading ? "Sending..." : "Send Message"}
-          </Button>
-        </form>
-      </div>
-      <div className="flex-1 flex flex-col gap-y-4 md:gap-y-6 text-pretty">
-        <h1 className="text-xl md:text-2xl font-semibold ">
-          Based in the Philippines | Available Worldwide
-        </h1>
-        <p className="md:leading-7 ">
-          Whether you&apos;re in Philippines, United States, Australia or
-          anywhere else, I&apos;m ready to collaborate remotely and turn your
-          ideas into reality. Let&apos;s create something amazing together!
-        </p>
-      </div>
+        </div>
+        <Button type="submit" disabled={loading}>
+          {loading ? "Sending..." : "Send message"}
+        </Button>
+      </form>
     </div>
   );
 };

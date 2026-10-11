@@ -1,111 +1,50 @@
 import Image from "next/image";
-import { Button } from "./ui/button";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { profile } from "@/lib/data";
 
-const profile = {
-  name: "H Canada",
-  location: "Cebu, Philippines",
+const socials = [
+  { name: "github", href: profile.links.github },
+  { name: "linkedin", href: profile.links.linkedin },
+];
 
-  roles: ["Frontend Developer"],
-
-  experience: {
-    internship: "1 year",
-    professional: "0",
-  },
-
-  stack: {
-    frontend: ["TypeScript", "Next.js", "React", "JavaScript", "Tailwind"],
-    backend: ["Node.js", "REST API", "ASP.NET Core"],
-    database: ["Supabase", "PostgreSQL", "MSSQL"],
-  },
-
-  meta: {
-    availableForFreelance: true,
-  },
-};
 export const Hero = () => {
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-24 md:mt-32 lg:mt-34 2xl:mt-60 flex flex-col md:flex-row gap-16 ">
-      <section className="flex-1 border">
-        <div className="flex justify-between items-center border-b space-x-5 py-2 px-4 md:py-4 md:px-8">
-          <div className="flex space-x-2 items-center">
-            <div className="size-3 rounded-full bg-red-500"></div>
-            <div className="size-3 rounded-full bg-orange-500"></div>
-            <div className="size-3 rounded-full bg-green-600"></div>
-          </div>
-          <div className="text-gray-400">profile.js</div>
-        </div>
+    <div className="pt-28 md:pt-40 grid gap-8 md:grid-cols-[260px_1fr] md:gap-10 md:items-center">
+      <Image
+        src="/pfp.png"
+        alt={`Photo of ${profile.name}`}
+        width={520}
+        height={520}
+        priority
+        className="w-48 md:w-full aspect-square rounded-xl object-cover"
+      />
 
-        <code className="text-pink-600 md:text-lg ">
-          <div className="p-7">
-            <div>
-              const <span className="text-violet-700">profile</span> ={" "}
-              <span className="text-gray-400"> {`{`}</span>
-            </div>
-            <p className="text-blue-900 dark:text-white pl-2 md:pl-6">
-              name:{" "}
-              <span className="text-green-700 dark:text-yellow-200 ">
-                {`"${profile.name}"`}
-                <span className="text-blue-900 dark:text-white">{`,`}</span>
-              </span>
-            </p>
-            <p className="text-blue-900 dark:text-white pl-2 md:pl-6">
-              role:{" "}
-              <span className="text-green-700 dark:text-yellow-200">
-                {`"Full-stack Developer"`}
-                <span className="text-blue-900 dark:text-white">{`,`}</span>
-              </span>
-            </p>
-            <p className="text-blue-900 dark:text-white pl-2 md:pl-6">
-              experience: <span className=""> {`{`}</span>
-              {Object.entries(profile.experience).map(([key, value]) => (
-                <span key={key} className="pl-4 md:pl-6 block">
-                  <span>{`${key}: `}</span>
-                  <span className="text-green-700 dark:text-yellow-200">
-                    {`"${value}"`}
-                  </span>
-                  <span>{`,`}</span>
-                </span>
-              ))}
-              <span className=""> {`},`}</span>
-            </p>
-            <p className="text-blue-900 dark:text-white pl-2 md:pl-6">
-              location:{" "}
-              <span className="text-green-700 dark:text-yellow-200">
-                {`"${profile.location}"`}
-              </span>
-              <span>{`,`}</span>
-            </p>
-            <p className="text-blue-900 dark:text-white pl-2 md:pl-6">
-              stack:<span> {`{`}</span>
-              {Object.entries(profile.stack).map(([key, value]) => (
-                <span className="pl-4 md:pl-6 block" key={key}>
-                  <span>{`${key}: `}</span> <span>{`[`}</span>
-                  <span className="text-green-700 dark:text-yellow-200">
-                    {`"${value.join(`", "`)}`}
-                  </span>
-                  <span className="text-green-700 dark:text-yellow-200">
-                    {`"`}
-                  </span>
-                  <span>{`],`}</span>
-                </span>
-              ))}
-              <span className="block ">{`},`}</span>
-            </p>
-            <div>
-              <span className="text-gray-400"> {`};`}</span>
-            </div>
-          </div>
-        </code>
-      </section>
-      <section className="flex-1 relative items-center md:flex justify-center hidden flex-col">
-        <Image
-          src={"/pfp.png"}
-          alt="Profile Picture"
-          width={480}
-          height={480}
-          className="rounded-full object-cover size-112"
-        />
-      </section>
+      <div>
+        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+          {profile.name}
+        </h1>
+        <div className="mt-5 space-y-4 leading-7 text-muted-foreground text-pretty">
+          {profile.intro.map((paragraph) => (
+            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+          ))}
+        </div>
+        <ul className="mt-6 flex flex-wrap gap-5 font-mono text-sm">
+          {socials.map((social) => (
+            <li key={social.name}>
+              <Link
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {social.name}
+                <ArrowUpRight className="size-3.5" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

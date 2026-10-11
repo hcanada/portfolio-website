@@ -1,84 +1,78 @@
 import Image from "next/image";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "./button";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { Chip } from "../section-heading";
+import type { Project } from "@/lib/data";
 
-const project = [
-  {
-    name: "Free Items Website",
-    project: "personal",
-    photo: "/inprogress.webp",
-    description:
-      "A location-based platform where people give away items for free, discover nearby giveaways, and connect with their community.",
-    stack: ["Nextjs", "TypeScript", "Supabase", "Tailwind "],
-  },
-  {
-    name: "Travue",
-    project: "personal",
-    photo: "/inprogress.webp",
-    description:
-      "A social media platform where people share their travel vlogs and experiences. Discover new places, get travel tips, and watch personal stories from other travelers.",
-    stack: ["Nextjs", "TypeScript", "Supabase", "Tailwind "],
-  },
-  {
-    name: "Crypto Price Bot",
-    project: "personal",
-    photo: "/bot.jpg",
-    description:
-      "A Telegram bot that instantly provides the latest cryptocurrency price. Simply type the name of any cryptocurrency, and the bot will reply with its current price.",
-    stack: ["Python", "Telebot", "Coinmarketcap API "],
-  },
-  {
-    name: "Leave Management System",
-    project: "professional",
-    photo: "/lms.png",
-    description:
-      "An internal application developed for Mercedes-Benz Group Services Phils., Inc that allows employees to submit leave requests and enables managers and HR to approve and monitor employee leave.",
-    stack: ["ReactJS", ".NET", "MS SQL Server "],
-  },
-];
 type ProjectCardProps = {
-  project: string;
+  project: Project;
+  showLogo: boolean;
 };
-export const Projectcard = (props: ProjectCardProps) => {
-  const selectedProject = props.project;
+
+export const Projectcard = ({ project, showLogo }: ProjectCardProps) => {
   return (
-    <div className="mt-20  gap-4 md:gap-6 grid md:grid-cols-3 justify-center">
-      {project.map(
-        (proj) =>
-          proj.project === selectedProject && (
-            <Card key={proj.name} className="max-w-sm flex-1">
-              <CardHeader>
-                <div className="relative h-48 md:h-64 w-full">
-                  <Image
-                    src={proj.photo}
-                    alt="Project photo"
-                    fill
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-                <CardTitle className="text-xl mt-auto">{proj.name}</CardTitle>
-                <CardDescription>{proj.description}</CardDescription>
-              </CardHeader>
-              <CardFooter className="mt-auto flex-wrap">
-                {proj.stack.map((stack) => (
-                  <Button
-                    key={stack}
-                    variant={"link"}
-                    className="hover:cursor-default p-2 "
-                  >
-                    {stack}
-                  </Button>
-                ))}
-              </CardFooter>
-            </Card>
-          )
-      )}
-    </div>
+    <article className="rounded-xl border bg-card p-5 flex gap-4 md:gap-5">
+      <div className="relative size-12 md:size-14 shrink-0 overflow-hidden rounded-xl border bg-background grid place-items-center">
+        {showLogo && project.logo ? (
+          <Image
+            src={project.logo}
+            alt={`${project.name} logo`}
+            fill
+            sizes="56px"
+            className="object-cover"
+          />
+        ) : (
+          <span className="font-mono text-sm md:text-base font-semibold text-primary">
+            {project.initials}
+          </span>
+        )}
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="text-lg font-semibold leading-snug">
+            {project.url ? (
+              <Link
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                {project.name}
+              </Link>
+            ) : (
+              project.name
+            )}
+          </h3>
+          {project.url ? (
+            <Link
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-1 inline-flex shrink-0 items-center gap-1 font-mono text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Visit site
+              <ArrowUpRight className="size-3.5" />
+            </Link>
+          ) : (
+            project.label && (
+              <span className="mt-1 shrink-0 rounded-full border px-2.5 py-0.5 font-mono text-xs text-muted-foreground">
+                {project.label}
+              </span>
+            )
+          )}
+        </div>
+        <p className="mt-1.5 leading-7 text-muted-foreground text-pretty">
+          {project.description}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {project.stack.map((item) => (
+            <Chip key={item} className="px-2 py-0.5 md:text-xs">
+              {item}
+            </Chip>
+          ))}
+        </div>
+      </div>
+    </article>
   );
 };

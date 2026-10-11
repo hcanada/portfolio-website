@@ -4,51 +4,56 @@ import { ThemeToggle } from "./ui/themeToggle";
 import { Github, Linkedin } from "lucide-react";
 import { Menubar } from "./menu";
 import { NavBarData } from "./navbarData";
+import { profile } from "@/lib/data";
 
 export const Navbar = () => {
   return (
     <header>
-      <nav className="fixed p-4 border-b flex justify-between  top-0 left-0 w-full bg-background/80 backdrop-blur md:px-40 z-20">
-        <div>
+      <nav className="fixed top-0 left-0 w-full border-b bg-background/80 backdrop-blur z-20">
+        <div className="mx-auto max-w-3xl px-5 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/">
-            <h1 className="font-bold text-2xl tracking-tight text-foreground">
+            <span className="font-bold text-xl tracking-tight text-foreground">
               H<span className="text-primary font-semibold">Canada</span>
-            </h1>
+            </span>
           </Link>
-        </div>
-        <div className="hidden sm:block">
-          {NavBarData.map((navbar) => (
-            <Link href={navbar.link} key={navbar.name}>
-              <Button variant="ghost" className="mx-2 ">
-                {navbar.name}
+          <div className="hidden md:flex items-center">
+            {NavBarData.map((navbar) => (
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                key={navbar.name}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <Link href={navbar.link}>{navbar.name}</Link>
               </Button>
-            </Link>
-          ))}
-        </div>
-        <div>
-          <div className="sm:hidden">
-            <Menubar />
+            ))}
           </div>
-          <div className="hidden sm:flex items-center">
-            <Link
-              href="https://github.com/hcanada "
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="ghost">
-                <Github />
+          <div>
+            <div className="md:hidden">
+              <Menubar />
+            </div>
+            <div className="hidden md:flex items-center">
+              <Button asChild variant="ghost" size="icon" aria-label="GitHub">
+                <Link
+                  href={profile.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github />
+                </Link>
               </Button>
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/h-canada/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="ghost">
-                <Linkedin />
+              <Button asChild variant="ghost" size="icon" aria-label="LinkedIn">
+                <Link
+                  href={profile.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin />
+                </Link>
               </Button>
-            </Link>
-            <ThemeToggle />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </nav>

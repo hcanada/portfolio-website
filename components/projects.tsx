@@ -1,22 +1,27 @@
-"use client";
-import React, { useState } from "react";
-import { Button } from "./ui/button";
+import fs from "node:fs";
+import path from "node:path";
+import { projects } from "@/lib/data";
+import { SectionHeading } from "./section-heading";
 import { Projectcard } from "./ui/projectcard";
 
+const hasFile = (src?: string) =>
+  !!src && fs.existsSync(path.join(process.cwd(), "public", src));
+
 export const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState("professional");
   return (
     <div>
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-24 md:mt-28 lg:mt-32 2xl:mt-36">
-        <div className=" flex justify-center space-x-5">
-          <Button onClick={() => setSelectedProject("professional")}>
-            Professional Project
-          </Button>
-          <Button onClick={() => setSelectedProject("personal")}>
-            Personal Project
-          </Button>
-        </div>
-        <Projectcard project={selectedProject} />
+      <SectionHeading
+        title="Projects"
+        intro="Products I've built at work and on my own. Live ones are one click away."
+      />
+      <div className="space-y-4">
+        {projects.map((project) => (
+          <Projectcard
+            key={project.name}
+            project={project}
+            showLogo={hasFile(project.logo)}
+          />
+        ))}
       </div>
     </div>
   );
